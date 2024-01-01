@@ -1,0 +1,27 @@
+/* 
+    Created on : Dec 20, 2023, 11:12:34 AM
+    Author     : mohilmokaria
+*/
+
+html {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 2%;
+}
+
+hr{
+    margin-right: 40%;
+    margin-left: 40%;
+}
+
+
+.mybox{
+    padding-top: 50px;
+    padding-bottom: 30px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.myinp{
+    margin: 10px;
+}
