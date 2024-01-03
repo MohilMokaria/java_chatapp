@@ -1,7 +1,8 @@
 package myClasses;
 
-
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Message {
 
@@ -35,6 +36,15 @@ public class Message {
 
     public Timestamp getMsgTime() {
         return this.msgTime;
+    }
+
+    public String getFormattedMsgTime() {
+        if (msgTime != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm | dd/MM/yyyy");
+            return dateFormat.format(new Date(msgTime.getTime()));
+        } else {
+            return null;
+        }
     }
 
     public void setSender(String sender) {

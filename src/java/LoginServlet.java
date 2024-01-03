@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
                 if (rs.next()) {
                     HttpSession session = request.getSession();
                     session.setAttribute("userEmail", email);
-                    response.sendRedirect("./chat.jsp");
+                    response.sendRedirect("./ChatServlet");
                 } else {
                     pw.println("Invalid Login Credentials!\nTry Again");
                 }

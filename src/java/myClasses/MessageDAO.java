@@ -12,10 +12,10 @@ import java.util.List;
 public class MessageDAO extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    String jdbcUri = getServletContext().getInitParameter("jdbcUri");
-    String dbUri = getServletContext().getInitParameter("dbUri");
-    String dbId = getServletContext().getInitParameter("dbId");
-    String dbPass = getServletContext().getInitParameter("dbPass");
+    String jdbcUri = "com.mysql.cj.jdbc.Driver";
+    String dbUri = "jdbc:mysql://localhost:3306/mysql";
+    String dbId = "root";
+    String dbPass = "";
 
     public List<Message> getMessagesByReceiver(String receiver) {
         List<Message> messages = new ArrayList<>();

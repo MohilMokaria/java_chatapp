@@ -1,4 +1,5 @@
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,8 +13,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import myClasses.Message;
 
 @WebServlet("/ChatServlet")
 public class ChatServlet extends HttpServlet {
@@ -67,4 +71,35 @@ public class ChatServlet extends HttpServlet {
             pw.println("Error: " + ex.getMessage());
         }
     }
+
+    public String toString(Message m) {
+        return "";
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter pw = response.getWriter();
+        response.setContentType("text/html");
+
+        try {
+            log("\n\n\n\nINTO GET\n\n\n");
+            String receiver = (String) request.getSession().getAttribute("userEmail");
+            log(receiver);
+
+            List<Message> messageList = new ArrayList<>();
+
+            messageList.add(new Message("John", "Jane", "Hello!", new Timestamp(System.currentTimeMillis())));
+            messageList.add(new Message("Jane", "John", "Hi there!", new Timestamp(System.currentTimeMillis())));
+            request.setAttribute("messageList", messageList);
+
+            // Forward the request to the JSP page
+            RequestDispatcher rd = request.getRequestDispatcher("chat.jsp");
+            request.getRequestDispatcher("chat.jsp").forward(request, response);
+            rd.include(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(ChatServlet.class.getName()).log(Level.SEVERE, null, ex);
+            pw.println("Error: " + ex.getMessage());
+        }
+    }
+
 }

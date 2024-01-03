@@ -11,12 +11,12 @@
     <form id="regform" action="LoginServlet" method="post">
         <h1>User Login Form</h1>
         <label for="mail">Email ID : </label>
-        <input type="email" id="mail" name="mail" autofocus required>
+        <input type="email" id="mail" name="mail" value="mohil@mokaria.com" required>
 
         <label for="pass">New Password : </label>
-        <input type="password" id="pass" name="pass" required>
+        <input type="password" id="pass" name="pass" value="1234567" required>
 
-        <center><button type="submit">Login</button></center>
+        <center><button type="submit" autofocus>Login</button></center>
         
         <p>Don't have a account? <a href="./index.jsp">Sign-up</a></p>
     </form>
