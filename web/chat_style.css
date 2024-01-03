@@ -13,6 +13,10 @@ hr{
     margin-left: 40%;
 }
 
+#myMenu{
+    margin-left: 4%;
+    margin-right: 4%;
+}
 
 .mybox{
     padding-top: 50px;
@@ -28,4 +32,9 @@ hr{
 .messages_card{
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.myPill{
+    padding-left: 10px;
+    padding-right: 10px;
 }

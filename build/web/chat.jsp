@@ -10,8 +10,9 @@
 
     <!--JQUERY CDN-->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <!-- BOOTSTRAP CDN -->
+    <!-- BOOTSTRAP CDNs -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <!-- LOCAL CSS LINK -->
     <link rel="stylesheet" href="./chat_style.css" />
 </head>
@@ -49,35 +50,88 @@
         </form>
         <hr class="border border-primary border-2">
         
-        <form id="refreshForm" action="ChatServlet" method="get">
+<!--        <form id="refreshForm" action="ReceiveMessageServet" method="get">
             <button type="submit" class="btn btn-outline-primary">Refresh Messages</button>
-        </form>
+        </form>-->
         
-        <section>
-            <%
-                List<Message> messageList = (List<Message>) request.getAttribute("messageList");
+        <section id="myMenu">    
+            <ul class="nav nav-pills mb-3 d-flex justify-content-center" id="pills-tab" role="tablist">
+                    <li class="nav-item myPill" role="presentation">
+                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Received Messages</button>
+                      </li>
+                      <li class="nav-item myPill" role="presentation">
+                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Sent Messages</button>
+                      </li>
+            </ul>
+            
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                    <%
+                        List<Message> messageList = (List<Message>) request.getAttribute("messageList");
 
-                if (messageList != null && !messageList.isEmpty()) {
-                    for (Message message : messageList) {
-            %>
-                <div class="card messages_card">
-                  <div class="card-body">
-                      <div class="row">
-                          <h5 class="card-title col"><%= message.getSender() %></h5>
-                          <p class="col text-end"><%= message.getFormattedMsgTime() %></p>
-                      </div>
-                    <p class="card-text"><%= message.getMsg() %></p>
-                  </div>
+                        if (messageList != null && !messageList.isEmpty()) {
+                            for (Message message : messageList) {
+                    %>
+                        <div class="card messages_card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <h5 class="card-title col">FROM: <%= message.getSender() %></h5>
+                                  <p class="col text-end"><%= message.getFormattedMsgTime() %></p>
+                              </div>
+                            <p class="card-text"><%= message.getMsg() %></p>
+                          </div>
+                        </div>
+                    <%
+                            }
+                        }
+                        else {
+                    %>
+                        <div class="card messages_card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <h5 class="card-title col">No Messages Received Yet</h5>
+                              </div>
+                            <p class="card-text">Try Connecting to Friends to Receive Messages!</p>
+                          </div>
+                        </div>
+                    <%
+                        }
+                    %>
                 </div>
-            <%
-                    }
-                }
-                else {
-            %>
-                    <li>No messages available</li>
-            <%
-                }
-            %>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                    <%
+                        List<Message> sentList = (List<Message>) request.getAttribute("sentList");
+
+                        if (sentList != null && !sentList.isEmpty()) {
+                            for (Message message : sentList) {
+                    %>
+                        <div class="card messages_card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <h5 class="card-title col">TO: <%= message.getReceiver() %></h5>
+                                  <p class="col text-end"><%= message.getFormattedMsgTime() %></p>
+                              </div>
+                            <p class="card-text"><%= message.getMsg() %></p>
+                          </div>
+                        </div>
+                    <%
+                            }
+                        }
+                        else {
+                    %>
+                        <div class="card messages_card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <h5 class="card-title col">No Messages Sent to Display</h5>
+                              </div>
+                            <p class="card-text">Try Sending some Messages!</p>
+                          </div>
+                        </div>
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
         </section>
 
     <% } else { %>

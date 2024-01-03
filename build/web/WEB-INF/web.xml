@@ -14,7 +14,7 @@
     </context-param>
     <context-param>
         <param-name>dbPass</param-name>
-        <param-value></param-value>
+        <param-value/>
     </context-param>
     <servlet>
         <servlet-name>ChatServlet</servlet-name>
@@ -32,6 +32,14 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReceiveMessageServet</servlet-name>
+        <servlet-class>ReceiveMessageServet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SentMessageServlet</servlet-name>
+        <servlet-class>SentMessageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChatServlet</servlet-name>
         <url-pattern>/ChatServlet</url-pattern>
@@ -47,5 +55,13 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReceiveMessageServet</servlet-name>
+        <url-pattern>/ReceiveMessageServet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SentMessageServlet</servlet-name>
+        <url-pattern>/SentMessageServlet</url-pattern>
     </servlet-mapping>
 </web-app>
