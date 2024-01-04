@@ -10,11 +10,19 @@
 <body>
     <form id="regform" action="LoginServlet" method="post">
         <h1>User Login Form</h1>
+        <% 
+            String error = (String) request.getAttribute("error");
+            if(error != null && !error.isEmpty()){
+        %>
+                <p class="error"><%= error %></p>
+        <%
+            } 
+        %>
         <label for="mail">Email ID : </label>
-        <input type="email" id="mail" name="mail" value="mohil@mokaria.com" required>
+        <input type="email" id="mail" name="mail" required>
 
         <label for="pass">New Password : </label>
-        <input type="password" id="pass" name="pass" value="1234567" required>
+        <input type="password" id="pass" name="pass" required>
 
         <center><button type="submit" autofocus>Login</button></center>
         

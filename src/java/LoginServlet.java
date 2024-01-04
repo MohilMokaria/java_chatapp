@@ -1,4 +1,5 @@
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -49,7 +50,10 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("userEmail", email);
                     response.sendRedirect("./ReceiveMessageServet");
                 } else {
-                    pw.println("Invalid Login Credentials!\nTry Again");
+                    String error = "Invalid Login Credentials!";
+                    request.setAttribute("error", error);
+                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                    rd.include(request, response);
                 }
             }
         } catch (SQLException | ClassNotFoundException ex) {

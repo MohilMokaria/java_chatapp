@@ -1,4 +1,5 @@
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -43,9 +44,10 @@ public class SignupServlet extends HttpServlet {
                 ResultSet rs = ps1.executeQuery();
 
                 if (rs.next()) {
-                    pw.println("<h1>User already registered with " + email + "</h1>");
-                    pw.println("<br><a href=\"./index.jsp\">Try Again with new email</a>");
-                    pw.println("<br><br><a href=\"./login.jsp\">Login to existing account</a>");
+                    String error = "User already registered with <br>" + email;
+                    request.setAttribute("error", error);
+                    RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                    rd.include(request, response);
                 } else {
                     PreparedStatement ps2 = con.prepareStatement("INSERT INTO chatusers(mail, pass) values(?,?)");
                     ps2.setString(1, email);

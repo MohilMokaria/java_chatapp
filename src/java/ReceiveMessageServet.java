@@ -79,7 +79,6 @@ public class ReceiveMessageServet extends HttpServlet {
                 request.setAttribute("messageList", messageList);
                 request.setAttribute("sentList", sentList);
                 RequestDispatcher rd = request.getRequestDispatcher("chat.jsp");
-                request.getRequestDispatcher("chat.jsp").forward(request, response);
                 rd.include(request, response);
             }
 

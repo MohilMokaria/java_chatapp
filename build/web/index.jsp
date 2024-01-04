@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,9 +38,17 @@
 <body>
     <form id="regform" action="SignupServlet" method="post" onsubmit="return validator()">
         <h1>User Sign-up Form</h1>
+        <% 
+            String error = (String) request.getAttribute("error");
+            if(error != null && !error.isEmpty()){
+        %>
+                <p class="error"><%= error %></p>
+        <%
+            } 
+        %>
         <label for="mail">Email ID : </label>
         <input type="email" id="mail" name="mail" autofocus required>
-
+        
         <label for="pass1">New Password : </label>
         <input type="password" id="pass1" name="pass1" required>
         
