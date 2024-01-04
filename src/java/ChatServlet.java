@@ -1,4 +1,5 @@
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -46,7 +47,10 @@ public class ChatServlet extends HttpServlet {
 
                 try (var rs = ps1.executeQuery()) {
                     if (!rs.next()) {
-                        pw.println("<h1>No such user found with id: " + to + "\nRecheck if this user exists!</h1>");
+                        String error = "No such user found with id: " + to;
+                        request.setAttribute("error", error);
+                        RequestDispatcher rd = request.getRequestDispatcher("chat.jsp");
+                        rd.include(request, response);
                     } else {
                         try (PreparedStatement ps2 = con.prepareStatement("INSERT INTO chattbl(sender, receiver, msg, msg_time) values(?,?,?,?)")) {
                             ps2.setString(1, from);
