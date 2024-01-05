@@ -11,8 +11,11 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,6 +69,45 @@ public class ChatServlet extends HttpServlet {
                 }
             }
         } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ChatServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("exception", ex.getMessage());
+            RequestDispatcher rd = request.getRequestDispatcher("chat.jsp");
+            rd.include(request, response);
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String jdbcUri = getServletContext().getInitParameter("jdbcUri");
+        String dbUri = getServletContext().getInitParameter("dbUri");
+        String dbId = getServletContext().getInitParameter("dbId");
+        String dbPass = getServletContext().getInitParameter("dbPass");
+        response.setContentType("text/html");
+        List<String> usersList = new ArrayList<>();
+
+        try {
+
+            Class.forName(jdbcUri);
+            try (Connection connection = DriverManager.getConnection(dbUri, dbId, dbPass)) {
+
+                String sql = "SELECT mail FROM chatusers ORDER BY mail ASC";
+                try (PreparedStatement statement = connection.prepareStatement(sql)) {
+
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        while (resultSet.next()) {
+                            String user = resultSet.getString("mail");
+                            usersList.add(user);
+                        }
+
+                    }
+                }
+                request.setAttribute("usersList", usersList);
+                RequestDispatcher rd = request.getRequestDispatcher("userslist.jsp");
+                rd.include(request, response);
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ChatServlet.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("exception", ex.getMessage());
             RequestDispatcher rd = request.getRequestDispatcher("chat.jsp");
