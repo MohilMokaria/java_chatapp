@@ -40,14 +40,7 @@
     
 </head>
 <body>
-    <% 
-        String exceptionMsg = (String) request.getAttribute("exception");
-        if(exceptionMsg != null && !exceptionMsg.isEmpty()){
-    %>
-            <p class="alert alert-danger"><%= exceptionMsg %></p> 
-    <%
-        } 
-    %>
+    
     <form id="regform" action="SignupServlet" method="post" onsubmit="return validator()">
         <h1>User Sign-up Form</h1>
         <% 
@@ -70,6 +63,14 @@
         <center><button type="submit">Sign-up</button></center>
         
         <p>Already Signed-up? <a href="./login.jsp">Login</a></p>
+        <% 
+            String exceptionMsg = (String) request.getAttribute("exception");
+            if(exceptionMsg != null && !exceptionMsg.isEmpty()){
+        %>
+                <p class="alert alert-danger"><%= exceptionMsg %></p> 
+        <%
+            } 
+        %>
     </form>
 </body>
 </html>

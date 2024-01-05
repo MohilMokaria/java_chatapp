@@ -36,7 +36,7 @@
         <%
             } 
         %>
-
+        <br>
         <hr class="border border-primary border-2">
         <form action="ChatServlet" method="post" class="container card mybox">
             <div class="grid gap-0 row-gap-3">

@@ -6,15 +6,15 @@
     </context-param>
     <context-param>
         <param-name>dbUri</param-name>
-        <param-value>jdbc:mysql://localhost:3306/mysql</param-value>
+        <param-value>jdbc:YOURSQLCONNECTIONSTRING:3306/test</param-value>
     </context-param>
     <context-param>
         <param-name>dbId</param-name>
-        <param-value>root</param-value>
+        <param-value>DATABASEUSERNAME</param-value>
     </context-param>
     <context-param>
         <param-name>dbPass</param-name>
-        <param-value/>
+        <param-value>DATABASEPASSWORD</param-value>
     </context-param>
     <servlet>
         <servlet-name>ChatServlet</servlet-name>
