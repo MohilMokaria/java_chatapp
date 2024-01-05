@@ -58,7 +58,9 @@ public class LoginServlet extends HttpServlet {
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            pw.println("Error: " + ex.getMessage());
+            request.setAttribute("exception", ex.getMessage());
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.include(request, response);
         }
     }
 }

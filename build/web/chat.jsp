@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="./chat_style.css" />
     </head>
     <body>
+        
         <% if (session.getAttribute("userEmail") != null) {%>
 
         <div class="d-flex justify-content-between">
@@ -26,6 +27,15 @@
                 <button class="btn btn-outline-danger">Logout</button>
             </form>
         </div>
+            
+        <% 
+            String exceptionMsg = (String) request.getAttribute("exception");
+            if(exceptionMsg != null && !exceptionMsg.isEmpty()){
+        %>
+                <p class="alert alert-danger"><%= exceptionMsg %></p> 
+        <%
+            } 
+        %>
 
         <hr class="border border-primary border-2">
         <form action="ChatServlet" method="post" class="container card mybox">

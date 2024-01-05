@@ -84,7 +84,9 @@ public class ReceiveMessageServet extends HttpServlet {
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ChatServlet.class.getName()).log(Level.SEVERE, null, ex);
-            pw.println("Error: " + ex.getMessage());
+            request.setAttribute("exception", ex.getMessage());
+            RequestDispatcher rd = request.getRequestDispatcher("chat.jsp");
+            rd.include(request, response);
         }
     }
 }

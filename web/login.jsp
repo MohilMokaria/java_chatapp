@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="./index_styles.css"/>
 </head>
 <body>
+    <% 
+        String exceptionMsg = (String) request.getAttribute("exception");
+        if(exceptionMsg != null && !exceptionMsg.isEmpty()){
+    %>
+            <p class="alert alert-danger"><%= exceptionMsg %></p> 
+    <%
+        } 
+    %>
     <form id="regform" action="LoginServlet" method="post">
         <h1>User Login Form</h1>
         <% 
