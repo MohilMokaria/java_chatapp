@@ -6,15 +6,15 @@
     </context-param>
     <context-param>
         <param-name>dbUri</param-name>
-        <param-value>jdbc:mysql://chatappdb.ct0ksg66iprz.ap-south-1.rds.amazonaws.com/test</param-value>
+        <param-value>jdbc:YOUR DB LINK HERE!!/test</param-value>
     </context-param>
     <context-param>
         <param-name>dbId</param-name>
-        <param-value>admin</param-value>
+        <param-value>DB USER NAME</param-value>
     </context-param>
     <context-param>
         <param-name>dbPass</param-name>
-        <param-value>asdf1234</param-value>
+        <param-value>DB PASSWORD</param-value>
     </context-param>
     <servlet>
         <servlet-name>ChatServlet</servlet-name>
