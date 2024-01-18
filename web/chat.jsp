@@ -4,9 +4,7 @@
 <%@ page import="java.util.List" %>
 
 <!DOCTYPE html>
-
 <head>
-
     <title>Simple Chat App</title>
     <!--FONT AWESOME CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -79,101 +77,101 @@
     <section>
         <div class="row align-items-center mt-4 mb-4">
             <div class="col-md-9 col-sm-8 mx-auto">
-                
-                    <div class="card-body d-flex flex-column">
-                        
-                        <ul class="nav nav-pills mb-3 d-flex justify-content-between" id="pills-tab" role="tablist">
-                            <div class="d-flex">
-                                <li class="nav-item myPill" role="presentation">
-                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Received</button>
-                                </li>
-                                <li class="nav-item myPill" role="presentation">
-                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Sent</button>
-                                </li>
-                            </div>
-                            <div class="d-flex gap-1">
-                                <form id="refreshForm" action="ReceiveMessageServet" method="get" class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-arrows-rotate"></i></button>
-                                </form>
-                                <form id="refreshForm" action="ChatServlet" method="get">
-                                    <button type="submit" class="btn btn-link">Users List</button>
-                                </form>
-                            </div>
 
-                        </ul>
+                <div class="card-body d-flex flex-column">
 
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                                <%
-                                    List<Message> messageList = (List<Message>) request.getAttribute("messageList");
+                    <ul class="nav nav-pills mb-3 d-flex justify-content-between" id="pills-tab" role="tablist">
+                        <div class="d-flex">
+                            <li class="nav-item myPill" role="presentation">
+                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Received</button>
+                            </li>
+                            <li class="nav-item myPill" role="presentation">
+                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Sent</button>
+                            </li>
+                        </div>
+                        <div class="d-flex gap-1">
+                            <form id="refreshForm" action="ReceiveMessageServet" method="get" class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-outline-success"><i class="fa-solid fa-arrows-rotate"></i></button>
+                            </form>
+                            <form id="refreshForm" action="ChatServlet" method="get">
+                                <button type="submit" class="btn btn-link">Users List</button>
+                            </form>
+                        </div>
 
-                                    if (messageList != null && !messageList.isEmpty()) {
-                                        for (Message message : messageList) {
-                                %>
-                                <div class="card mb-2">
-                                    <div class="card-header">
-                                        <%= message.getSender()%>
-                                    </div>
-                                    <div class="card-body">
-                                        <blockquote class="blockquote mb-0">
-                                            <p><%= message.getMsg()%></p>
-                                            <footer class="blockquote-footer text-muted"><small><%= message.getFormattedMsgTime()%></small></footer>
-                                        </blockquote>
-                                    </div>
+                    </ul>
+
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                            <%
+                                List<Message> messageList = (List<Message>) request.getAttribute("messageList");
+
+                                if (messageList != null && !messageList.isEmpty()) {
+                                    for (Message message : messageList) {
+                            %>
+                            <div class="card mb-2">
+                                <div class="card-header">
+                                    <%= message.getSender()%>
                                 </div>
-                                <%
-                                    }
-                                } else {
-                                %>
-                                <div class="card messages_card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <h5 class="card-title col">No Messages Received Yet</h5>
-                                        </div>
-                                        <p class="card-text">Try Connecting to Friends to Receive Messages!</p>
-                                    </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p><%= message.getMsg()%></p>
+                                        <footer class="blockquote-footer text-muted"><small><%= message.getFormattedMsgTime()%></small></footer>
+                                    </blockquote>
                                 </div>
-                                <%
-                                    }
-                                %>
                             </div>
-                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-                                <%
-                                    List<Message> sentList = (List<Message>) request.getAttribute("sentList");
-
-                                    if (sentList != null && !sentList.isEmpty()) {
-                                        for (Message message : sentList) {
-                                %>
-                                <div class="card mb-2">
-                                    <div class="card-header">
-                                        <%= message.getReceiver()%>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <div class="card messages_card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <h5 class="card-title col">No Messages Received Yet</h5>
                                     </div>
-                                    <div class="card-body">
-                                        <blockquote class="blockquote mb-0">
-                                            <p><%= message.getMsg()%></p>
-                                            <footer class="blockquote-footer"><%= message.getFormattedMsgTime()%></footer>
-                                        </blockquote>
-                                    </div>
+                                    <p class="card-text">Try Connecting to Friends to Receive Messages!</p>
                                 </div>
-                                <%
-                                    }
-                                } else {
-                                %>
-                                <div class="card messages_card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <h5 class="card-title col">No Messages Sent to Display</h5>
-                                        </div>
-                                        <p class="card-text">Try Sending some Messages!</p>
-                                    </div>
-                                </div>
-                                <%
-                                    }
-                                %>
                             </div>
+                            <%
+                                }
+                            %>
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                            <%
+                                List<Message> sentList = (List<Message>) request.getAttribute("sentList");
+
+                                if (sentList != null && !sentList.isEmpty()) {
+                                    for (Message message : sentList) {
+                            %>
+                            <div class="card mb-2">
+                                <div class="card-header">
+                                    <%= message.getReceiver()%>
+                                </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p><%= message.getMsg()%></p>
+                                        <footer class="blockquote-footer"><%= message.getFormattedMsgTime()%></footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <div class="card messages_card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <h5 class="card-title col">No Messages Sent to Display</h5>
+                                    </div>
+                                    <p class="card-text">Try Sending some Messages!</p>
+                                </div>
+                            </div>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
-                
+                </div>
+
             </div>
         </div>
     </section>

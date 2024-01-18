@@ -25,7 +25,7 @@
         <label for="mail">Email ID : </label>
         <input type="email" id="mail" name="mail" autofocus required>
 
-        <label for="pass">New Password : </label>
+        <label for="pass">Your Password : </label>
         <input type="password" id="pass" name="pass" required>
 
         <center><button type="submit">Login</button></center>
